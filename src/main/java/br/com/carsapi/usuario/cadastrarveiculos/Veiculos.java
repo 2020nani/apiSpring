@@ -1,6 +1,7 @@
 package br.com.carsapi.usuario.cadastrarveiculos;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,26 +26,30 @@ public class Veiculos {
 	@NotBlank
 	private String modelo;
 
-	@NotBlank
-	private String ano;
+	@NotNull
+	private Integer ano;
 
 	@ManyToOne
 	@NotNull
 	private Usuario donoCarro;
+	
+	@Enumerated
+	private DiaRodizio rodizio;
 
 	@Deprecated
 	public Veiculos() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Veiculos(@NotBlank String valor, @NotBlank String marca, @NotBlank String modelo, @NotBlank String ano,
-			@NotNull Usuario donoCarro) {
+	public Veiculos(@NotBlank String valor, @NotBlank String marca, @NotBlank String modelo, @NotNull Integer ano,
+			@NotNull Usuario donoCarro, DiaRodizio rodizio ) {
 		super();
 		Valor = valor;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
 		this.donoCarro = donoCarro;
+		this.rodizio = rodizio;
 	}
 
 	public Long getId() {
@@ -63,18 +68,23 @@ public class Veiculos {
 		return modelo;
 	}
 
-	public String getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
 	public Usuario getDonoCarro() {
 		return donoCarro;
 	}
+	public DiaRodizio getRodizio() {
+		return rodizio;
+	}
 
 	@Override
 	public String toString() {
 		return "Veiculos [id=" + id + ", Valor=" + Valor + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano
-				+ ", donoCarro=" + donoCarro + "]";
+				+ ", donoCarro=" + donoCarro + ", rodizio=" + rodizio + "]";
 	}
+
+	
 
 }
